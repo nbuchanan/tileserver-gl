@@ -4,5 +4,8 @@ test_data
 data
 light
 plugins
-config.json
+config*.json
 *.mbtiles
+styles
+packages
+.idea

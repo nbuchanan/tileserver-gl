@@ -1,6 +1,6 @@
 {
   "name": "tileserver-gl",
-  "version": "1.7.0",
+  "version": "1.6.0",
   "description": "Map tile server for JSON GL styles - vector and server side generated raster tiles",
   "main": "src/main.js",
   "bin": "src/main.js",
@@ -22,6 +22,7 @@
     "@mapbox/mapbox-gl-native": "3.4.4",
     "@mapbox/sphericalmercator": "1.0.5",
     "advanced-pool": "0.3.2",
+    "async": "2.4.0",
     "base64url": "2.0.0",
     "canvas": "1.6.5",
     "clone": "2.1.1",
@@ -46,5 +47,18 @@
     "should": "^11.2.0",
     "mocha": "^3.2.0",
     "supertest": "^3.0.0"
+  },
+  "pkg": {
+    "scripts": [
+      "./src/*.js",
+      "./node_modules/sharp/lib/index.js"
+    ],
+    "assets": [
+      "./data/*",
+      "./node_modules/mbtiles/lib/schema.sql",
+      "./node_modules/glyph-pbf-composite/proto/glyphs.proto",
+      "./node_modules/sharp/lib/*",
+      "./public/**"
+    ]
   }
 }
