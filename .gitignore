@@ -7,5 +7,4 @@ plugins
 config*.json
 *.mbtiles
 styles
-packages
 .idea
