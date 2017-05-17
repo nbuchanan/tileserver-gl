@@ -47,17 +47,16 @@ You can read full documentation of this project at http://tileserver.readthedocs
 
 ## Using pkg module
 
-The [pkg node module](https://www.npmjs.com/package/pkg) can be used to create a bundle that does not require a machine
+The [pkg node module](https://www.npmjs.com/package/pkg) can be used to create a bundle that does not require a target machine
 to have node.js installed.
 
 ### Create Package
 
-Sample build for Windows and macOS. Currently node 4 is the supported target based on the current setup with 
-[tileserver-gl](https://github.com/klokantech/tileserver-gl). This command assumes there is a _packages_ directory here.
+Sample builds scripts are available for Windows/macOS/Linux. Currently node 4 is the supported target based on the current setup with 
+[tileserver-gl](https://github.com/klokantech/tileserver-gl). Only _tileserver-gl-light_ is supported on Windows since 
+[MapBox GL Native](https://github.com/mapbox/mapbox-gl-native). This command assumes there is a _packages_ directory here.
 
-`pkg . --debug --targets node4-macos-x64,node4-win-x64 --out-dir packages`
-
-See [the manual](https://www.npmjs.com/package/pkg#config) for more _pkg_ build options.
+See [the manual](https://www.npmjs.com/package/pkg#config) for more explanation _pkg_ build options.
 
 ### Run Package
 
