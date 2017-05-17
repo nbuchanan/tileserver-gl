@@ -17,6 +17,6 @@ do
   cp -r $i $OUTPUT_DIR
 done
 
-ECHO "Building with $CONFIG_FILE and pushing results to $OUTPUT_DIR..."
+echo "Building with $CONFIG_FILE and pushing results to $OUTPUT_DIR..."
 
 pkg . --targets node4-linux-x64 --out-dir $OUTPUT_DIR
