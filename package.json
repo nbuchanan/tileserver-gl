@@ -28,6 +28,7 @@
     "color": "1.0.3",
     "cors": "2.8.3",
     "express": "4.15.2",
+    "gdal": "0.9.4",
     "glyph-pbf-composite": "0.0.2",
     "handlebars": "4.0.8",
     "http-shutdown": "^1.2.0",
