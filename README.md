@@ -48,16 +48,26 @@ You can read full documentation of this project at http://tileserver.readthedocs
 ## Using pkg module
 
 The [pkg node module](https://www.npmjs.com/package/pkg) can be used to create a bundle that does not require a target machine
-to have node.js installed.
+to have node.js installed. To distinguish this addition feature from the main project the name was updated to tileserver-gl-pkg.
 
 ### Create Package
 
-Sample builds scripts are available for Windows/macOS/Linux. Currently node 4 is the supported target based on the current setup with 
-[tileserver-gl](https://github.com/klokantech/tileserver-gl). Only _tileserver-gl-light_ is supported on Windows since 
-[MapBox GL Native](https://github.com/mapbox/mapbox-gl-native). This command assumes there is a _packages_ directory here.
-
+Currently node 4 is the supported target based on the current setup with 
+[tileserver-gl](https://github.com/klokantech/tileserver-gl) (tested with 4.6.2). Only _tileserver-gl-pkg-light_ is supported on Windows since 
+[MapBox GL Native](https://github.com/mapbox/mapbox-gl-native). By default source data will be taken from a local directory named _data_
+and the output will be placed in a _packages_ directory. 
 See [the manual](https://www.npmjs.com/package/pkg#config) for more explanation _pkg_ build options.
+
+#### tileserver-gl-pkg
+
+To create the tileserver-gl-pkg executable run `npm run package`.
+
+#### tileserver-gl-pkg-light
+
+The "light" build process requires a local installation of _rsync_. To create the tileserver-gl-pkg-light executable 
+run `npm run package-light`.
 
 ### Run Package
 
-Run the relevant _run-me*_ script for your platform in the [packages](./packages) directory.
+Run the relevant _run-me*_ script for your platform in the [packages](./packages) directory. There is also a shortcut to
+open the corresponding URL in your browser. 

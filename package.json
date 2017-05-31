@@ -1,28 +1,26 @@
 {
-  "name": "tileserver-gl-light",
+  "name": "tileserver-gl-pkg",
   "version": "1.7.0",
-  "description": "Map tile server for JSON GL styles - vector and server side generated raster tiles",
+  "description": "Map tile server for JSON GL styles (bundled into executable using pkg) - vector and server side generated raster tiles",
   "main": "src/main.js",
   "bin": "src/main.js",
   "authors": [
-    "Petr Sloup <petr.sloup@klokantech.com>"
+    "Petr Sloup <petr.sloup@klokantech.com>",
+    "Nick Buchanan <nbuchanan@gmail.com>"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/klokantech/tileserver-gl.git"
+    "url": "https://github.com/nbuchanan/tileserver-gl.git"
   },
   "license": "BSD-2-Clause",
   "engines": {
     "node": ">=4.2.1 <5"
   },
-  "config" : {
-    "src_data_dir": "data",
-    "pkg_dir": "packages"
-  },
   "scripts": {
-    "copy-pkg-data": "copyfiles -f \"$npm_package_config_src_data_dir/*\" $npm_package_config_pkg_dir/data",
-    "copy-pkg-deps": "npm run copy-pkg-data -s && copyfiles -f './package-inputs/*' './node_modules/**/*.node' $npm_package_config_pkg_dir",
-    "package": "npm run copy-pkg-deps -s && pkg . --targets node4 --out-dir $npm_package_config_pkg_dir",
+    "copy-pkg-data": "copyfiles -f data/* packages/data",
+    "copy-pkg-deps": "npm run copy-pkg-data -s && copyfiles -f ./package-inputs/* ./node_modules/**/*.node packages",
+    "package": "npm run copy-pkg-deps -s && pkg . --targets node4 --out-dir packages",
+    "package-light": "npm run copy-pkg-deps -s && node build-light-pkg.js && cd light && npm install && pkg . --targets node4 --out-dir packages",
     "test": "mocha test/**.js"
   },
   "dependencies": {
