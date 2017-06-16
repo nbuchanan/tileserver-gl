@@ -2,7 +2,7 @@
 
 ECHO "iSoDrive!"
 
-SET CONFIG_FILE=config-raleigh-test.json
+SET CONFIG_FILE=iSoDrive-config.json
 
 SET ISODRIVE_PORT=9001
 

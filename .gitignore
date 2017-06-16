@@ -6,6 +6,5 @@ light
 plugins
 config*.json
 *.mbtiles
-styles
 .idea
 packages
