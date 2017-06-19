@@ -4,17 +4,22 @@
     <meta charset='utf-8' />
     <title>iSoDrive Explorer</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='resources/sprintf.min.v1.1.1.js'></script>
     <script src='resources/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script>
+    <script src='resources/mapbox-gl-js/plugins/mapbox-gl-supported/1.2.0/mapbox-gl-supported.js'></script>
+    <script src='resources/mapbox-gl-js/plugins/turf/v3.0.11/turf.min.js'></script>
+    <script src='resources/mapbox-gl-js/plugins/mapbox-gl-draw/v0.18.0/mapbox-gl-draw.js'></script>
     <link href='resources/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' type='text/css' />
+    <link href='resources/mapbox-gl-js/plugins/mapbox-gl-draw/v0.18.0/mapbox-gl-draw.css' rel='stylesheet' type='text/css'/>
     <link href='resources/main.css' rel='stylesheet' type='text/css' />
 </head>
 <body>
 
 <div id='map'></div>
 
-<!--<div id='distance' class='distance-container'></div>-->
-
-<!--<script src='resources/turf.min.v2.0.2.js'></script>-->
+<br/>
+<button id='zoomToAOI'>Zoom to AOI</button>
+<pre id='coordinatesDisplay'></pre>
 
 <!--<div id='menu'>-->
     <!--<input id='apex-style1' type='radio' name='rtoggle' value='apex-style1' checked='checked'>-->

@@ -16,3 +16,34 @@ body {
     padding: 10px;
     font-family: 'Open Sans', sans-serif;
 }
+
+#zoomToAOI {
+    display: block;
+    position: relative;
+    margin: 0px auto;
+    width: 130px;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #fff;
+    background: #2e2e2e;
+    opacity: 0.9;
+}
+
+#coordinatesDisplay {
+    display: block;
+    position: relative;
+    margin: 0px auto;
+    width: 250px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #2c8d33;
+    background: #2e2e2e;
+    opacity: 0.9;
+}

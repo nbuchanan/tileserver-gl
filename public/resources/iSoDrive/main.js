@@ -1,3 +1,9 @@
+// Check to see if Mapbox GL JS is supported in user's browser
+if (!mapboxgl.supported()) {
+    alert("Mapbox GL JS is not supported by your browser.");
+}
+
+// Create map control
 var map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'http://localhost:9001/styles/apex-style1.json', //stylesheet location
@@ -5,8 +11,19 @@ var map = new mapboxgl.Map({
     zoom: 12 // starting zoom
 });
 
+// Add Mapbox controls
 map.addControl(new mapboxgl.FullscreenControl());
+
 map.addControl(new mapboxgl.NavigationControl({position: 'top-right'}));
+
+var draw = new MapboxDraw({
+    displayControlsDefault: false,
+    controls: {
+        polygon: true,
+        trash: true
+    }
+});
+map.addControl(draw);
 
 // // Toggle styles
 // var layerList = document.getElementById('menu');
@@ -21,110 +38,58 @@ map.addControl(new mapboxgl.NavigationControl({position: 'top-right'}));
 //     inputs[i].onclick = switchLayer;
 // }
 
+// TODO pull this dynamically from datasets
+// Set AOI to move to based upon button
+var rduBounds = [[-79.116, 35.759], [-78.577, 36.051]]; // lower left, upper right
+document.getElementById('zoomToAOI').addEventListener('click', function() {
+    map.fitBounds(rduBounds);
+});
 
-// // Measure component
-// var distanceContainer = document.getElementById('distance');
+// TODO read this from URL
+// Draw bounding box for extract AOI(s)
+map.on('load', function () {
 
-// // GeoJSON object to hold our measurement features
-// var geojson = {
-//     "type": "FeatureCollection",
-//     "features": []
-// };
-//
-// // Used to draw a line between points
-// var linestring = {
-//     "type": "Feature",
-//     "geometry": {
-//         "type": "LineString",
-//         "coordinates": []
-//     }
-// };
-//
-// map.on('load', function() {
-//     map.addSource('geojson', {
-//         "type": "geojson",
-//         "data": geojson
-//     });
-//
-//     // Add styles to the map
-//     map.addLayer({
-//         id: 'measure-points',
-//         type: 'circle',
-//         source: 'geojson',
-//         paint: {
-//             'circle-radius': 5,
-//             'circle-color': '#000'
-//         },
-//         filter: ['in', '$type', 'Point']
-//     });
-//     map.addLayer({
-//         id: 'measure-lines',
-//         type: 'line',
-//         source: 'geojson',
-//         layout: {
-//             'line-cap': 'round',
-//             'line-join': 'round'
-//         },
-//         paint: {
-//             'line-color': '#000',
-//             'line-width': 2.5
-//         },
-//         filter: ['in', '$type', 'LineString']
-//     });
-//
-//     map.on('click', function(e) {
-//         var features = map.queryRenderedFeatures(e.point, { layers: ['measure-points'] });
-//
-//         // Remove the linestring from the group
-//         // So we can redraw it based on the points collection
-//         if (geojson.features.length > 1) geojson.features.pop();
-//
-//         // Clear the Distance container to populate it with a new value
-//         distanceContainer.innerHTML = '';
-//
-//         // If a feature was clicked, remove it from the map
-//         if (features.length) {
-//             var id = features[0].properties.id;
-//             geojson.features = geojson.features.filter(function(point) {
-//                 return point.properties.id !== id;
-//             });
-//         } else {
-//             var point = {
-//                 "type": "Feature",
-//                 "geometry": {
-//                     "type": "Point",
-//                     "coordinates": [
-//                         e.lngLat.lng,
-//                         e.lngLat.lat
-//                     ]
-//                 },
-//                 "properties": {
-//                     "id": String(new Date().getTime())
-//                 }
-//             };
-//
-//             geojson.features.push(point);
-//         }
-//
-//         if (geojson.features.length > 1) {
-//             linestring.geometry.coordinates = geojson.features.map(function(point) {
-//                 return point.geometry.coordinates;
-//             });
-//
-//             geojson.features.push(linestring);
-//
-//             // Populate the distanceContainer with total distance
-//             var value = document.createElement('pre');
-//             value.textContent = 'Total distance: ' + turf.lineDistance(linestring).toLocaleString() + 'km';
-//             distanceContainer.appendChild(value);
-//         }
-//
-//         map.getSource('geojson').setData(geojson);
-//     });
-// });
-//
-// map.on('mousemove', function (e) {
-//     var features = map.queryRenderedFeatures(e.point, { layers: ['measure-points'] });
-//     // UI indicator for clicking/hovering a point on the map
-//     map.getCanvas().style.cursor = (features.length) ? 'pointer' : 'crosshair';
-// });
+    map.addLayer({
+        'id': 'maine',
+        'type': 'line',
+        'source': {
+            'type': 'geojson',
+            'data': {
+                'type': 'Feature',
+                'properties': {},
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': [
+                        [-79.116, 35.759],
+                        [-79.116, 36.051],
+                        [-78.577, 36.051],
+                        [-78.577, 35.759],
+                        [-79.116, 35.759]
+                ]}
+            }
+        },
+        'layout': {
+            'line-join': 'round',
+            'line-cap': 'round'
+        },
+        'paint': {
+            'line-color': '#e18310',
+            'line-width': 3,
+            'line-dasharray': [3, 3],
+            'line-gap-width': 1,
+            'line-blur': 0,
+            'line-opacity': 0.7
+        }
+    });
+});
+
+// Show cursor coordinates in WGS1984
+map.on('mousemove', function (e) {
+    document.getElementById('info').innerHTML = sprintf('LAT/LNG : %.8g , %.8g', e.lngLat.lat, e.lngLat.lng);
+});
+
+// Go to location component
+// TODO Implement this
+
+// Measure component
+// TODO Is this needed?
