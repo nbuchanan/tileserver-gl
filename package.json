@@ -20,7 +20,7 @@
     "copy-pkg-data": "copyfiles -f data/* packages/data",
     "copy-pkg-deps": "npm run copy-pkg-data -s && copyfiles -f ./package-inputs/* ./node_modules/**/*.node packages",
     "package": "npm run copy-pkg-deps -s && pkg . --targets node4 --out-dir packages",
-    "package-light": "npm run copy-pkg-deps -s && node build-light-pkg.js && cd light && npm install && pkg . --targets node4 --out-dir packages",
+    "package-light": "npm run copy-pkg-deps -s && node build-light-pkg.js && cd light && npm install && pkg . --targets node4 --out-dir packages && copyfiles 'fonts/**' 'styles/**' packages",
     "test": "mocha test/**.js"
   },
   "dependencies": {

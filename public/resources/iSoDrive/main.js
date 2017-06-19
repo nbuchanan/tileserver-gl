@@ -1,25 +1,25 @@
 var map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'http://localhost:9001/styles/apex-style1.json', //stylesheet location
-    center: [43.782491, 33.356672], // starting position
-    zoom: 8 // starting zoom
+    center: [-78.8465, 35.905], // starting position
+    zoom: 12 // starting zoom
 });
 
 map.addControl(new mapboxgl.FullscreenControl());
 map.addControl(new mapboxgl.NavigationControl({position: 'top-right'}));
 
-// Toggle styles
-var layerList = document.getElementById('menu');
-var inputs = layerList.getElementsByTagName('input');
-
-function switchLayer(layer) {
-    var layerId = layer.target.id;
-    map.setStyle('http://localhost:9001/styles/' + layerId + '.json');
-}
-
-for (var i = 0; i < inputs.length; i++) {
-    inputs[i].onclick = switchLayer;
-}
+// // Toggle styles
+// var layerList = document.getElementById('menu');
+// var inputs = layerList.getElementsByTagName('input');
+//
+// function switchLayer(layer) {
+//     var layerId = layer.target.id;
+//     map.setStyle('http://localhost:9001/styles/' + layerId + '.json');
+// }
+//
+// for (var i = 0; i < inputs.length; i++) {
+//     inputs[i].onclick = switchLayer;
+// }
 
 
 // // Measure component
