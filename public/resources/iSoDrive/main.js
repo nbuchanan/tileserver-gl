@@ -85,7 +85,7 @@ map.on('load', function () {
 
 // Show cursor coordinates in WGS1984
 map.on('mousemove', function (e) {
-    document.getElementById('info').innerHTML = sprintf('LAT/LNG : %.8g , %.8g', e.lngLat.lat, e.lngLat.lng);
+    document.getElementById('coordinatesDisplay').innerHTML = sprintf('LAT/LNG : %.8g , %.8g', e.lngLat.lat, e.lngLat.lng);
 });
 
 // Go to location component
