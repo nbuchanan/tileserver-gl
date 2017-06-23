@@ -29,8 +29,7 @@ if (!isLight) {
   serve_rendered = require('./serve_rendered');
 }
 
-var iso_utils = require('./iso-utils'),
-    serve_iso = require('./serve_iso');
+var iso_utils = require('./iso-utils');
 var logger = require('loglevel').noConflict().getLogger('iSoDrive');
 
 function start(opts) {
