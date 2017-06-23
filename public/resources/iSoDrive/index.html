@@ -1,36 +1,28 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-    <meta charset='utf-8' />
+    <meta charset='utf-8'/>
     <title>iSoDrive Explorer</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
     <script src='resources/sprintf.min.v1.1.1.js'></script>
+    <script src='resources/jquery-3.2.1.min.js'></script>
     <script src='resources/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script>
     <script src='resources/mapbox-gl-js/plugins/mapbox-gl-supported/1.2.0/mapbox-gl-supported.js'></script>
     <script src='resources/mapbox-gl-js/plugins/turf/v3.0.11/turf.min.js'></script>
     <script src='resources/mapbox-gl-js/plugins/mapbox-gl-draw/v0.18.0/mapbox-gl-draw.js'></script>
-    <link href='resources/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' type='text/css' />
+    <link href='resources/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' type='text/css'/>
     <link href='resources/mapbox-gl-js/plugins/mapbox-gl-draw/v0.18.0/mapbox-gl-draw.css' rel='stylesheet' type='text/css'/>
-    <link href='resources/main.css' rel='stylesheet' type='text/css' />
+    <link href='resources/main.css' rel='stylesheet' type='text/css'/>
 </head>
 <body>
 
+<button id='zoomToAOI' class='customControl'>Zoom to AOI</button>
+
+<pre id='coordinatesDisplay' class='customControl'>LAT/LNG : XXX , XXX</pre>
+
+<nav id='layerToggleMenu' class='customControl menu'></nav>
+
 <div id='map'></div>
-
-<br/>
-<button id='zoomToAOI'>Zoom to AOI</button>
-<pre id='coordinatesDisplay'></pre>
-
-<!--<div id='menu'>-->
-    <!--<input id='apex-style1' type='radio' name='rtoggle' value='apex-style1' checked='checked'>-->
-    <!--<label for='apex-style1'>apex-style1</label>-->
-    <!--<input id='osm-bright' type='radio' name='rtoggle' value='osm-bright'>-->
-    <!--<label for='osm-bright'>osm-bright</label>-->
-    <!--<input id='positron' type='radio' name='rtoggle' value='positron'>-->
-    <!--<label for='positron'>positron</label>-->
-    <!--<input id='dark-matter' type='radio' name='rtoggle' value='dark-matter'>-->
-    <!--<label for='dark-matter'>dark-matter</label>-->
-<!--</div>-->
 
 <script src='main.js'></script>
 

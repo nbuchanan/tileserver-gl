@@ -4,7 +4,7 @@
       "root": "",
       "fonts": "fonts",
       "styles": "styles",
-      "mbtiles": "data"
+      "mbtiles": "data/background"
     },
     "formatQuality": {
       "jpeg": 80,
@@ -21,33 +21,32 @@
     "watermark": "ATLAS iSoDrive"
   },
   "styles": {
-    "dark-matter": {
-      "style": "dark-matter-local.json",
-      "serve_data": true,
-      "serve_rendered": true
-    },
     "osm-bright": {
       "style": "osm-bright-local.json",
-      "serve_data": true,
-      "serve_rendered": true
-    },
-    "positron": {
-      "style": "positron-local.json",
-      "serve_data": true,
-      "serve_rendered": true
-    },
-    "apex-style1": {
-      "style": "apex-style1.json",
       "serve_data": true,
       "serve_rendered": true
     }
   },
   "data": {
     "background-vector1": {
-      "mbtiles": "raleigh.mbtiles"
+      "mbtiles": "planet_z0_z8.mbtiles"
+    }
+  },
+  "iso": {
+    "data": {
+      "baseline": "data/operational",
+      "export": "data/export"
     },
-    "background-raster1": {
-      "mbtiles": "countries.mbtiles"
+    "indexers": {
+      "DTED" : {
+        "gdalDrivers": [
+          "DTED"
+        ],
+        "extensions" : [
+          "dt1",
+          "dt2"
+        ]
+      }
     }
   }
 }

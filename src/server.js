@@ -29,8 +29,15 @@ if (!isLight) {
   serve_rendered = require('./serve_rendered');
 }
 
+var iso_utils = require('./iso-utils'),
+    serve_iso = require('./serve_iso');
+var logger = require('loglevel').noConflict().getLogger('iSoDrive');
+
 function start(opts) {
   console.log('Starting server');
+
+  // TODO Make this configurable
+  logger.setLevel('TRACE');
 
   var app = express().disable('x-powered-by'),
       serving = {
@@ -88,6 +95,54 @@ function start(opts) {
   checkPath('fonts');
   checkPath('sprites');
   checkPath('mbtiles');
+
+  // Set up iso specific functionality
+  var isoConfig = config.iso || {};
+  var isoPaths = clone(isoConfig.data || {});
+  paths.baseline = path.resolve(paths.root, isoPaths.baseline || '');
+  paths.export = path.resolve(paths.root, isoPaths.export || '');
+  checkPath('baseline');
+  checkPath('export');
+
+  if (!isoConfig.indexers || isoConfig.indexers.length == 0) {
+    console.error('Must have at least one value for "indexers" property for iso config');
+    process.exit(1);
+  }
+
+  logger.debug('The following data indexers are configured');
+  Object.keys(isoConfig.indexers || {}).forEach(function(id) {
+    var indexer = isoConfig.indexers[id];
+    if (!indexer.extensions || indexer.extensions.length == 0) {
+      console.error('Must have at least one value for "extensions" property for ' + id + ' indexer');
+      process.exit(1);
+    }
+
+    if (!indexer.gdalDrivers || indexer.gdalDrivers.length == 0) {
+        console.error('Must have at least one value for "gdalDrivers" (e.g. GTiff) property for ' + id + ' indexer');
+        process.exit(1);
+    }
+
+    var logStr = '\t' + id + ' (';
+    Object.keys(indexer.extensions || {}).forEach(function(ext) {
+      logStr += indexer.extensions[ext] + ', ';
+    });
+    logStr = logStr.slice(0, -2) + ')';
+    logger.debug(logStr);
+  });
+
+  var mbTileIndexer = { 'MBtiles': { 'gdalDrivers': ['MBtiles'], 'extensions': ['mbtiles'] } };
+  var baseDataIndex = iso_utils.indexLayerMetadata(paths.mbtiles, mbTileIndexer);
+  var isoDataIndex = iso_utils.indexLayerMetadata(paths.baseline, isoConfig.indexers);
+
+  app.get('/base.json', function(req, res, next) {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(baseDataIndex);
+  });
+
+  app.get('/iso.json', function(req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(isoDataIndex);
+  });
 
   var data = clone(config.data || {});
 

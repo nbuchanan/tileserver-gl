@@ -1,6 +1,8 @@
 body {
     margin: 0;
     padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
 }
 
 #map {
@@ -10,40 +12,83 @@ body {
     width: 100%;
 }
 
-#menu {
-    position: absolute;
-    background: #fff;
-    padding: 10px;
-    font-family: 'Open Sans', sans-serif;
+.mapboxgl-popup {
+    max-width: 300px;
+    /*font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;*/
+}
+
+.customControl {
+    opacity: 0.9;
+    border-radius: 3px;
+    color: #fff;
+    background: #2e2e2e;
+    text-align: center;
+    border: none;
+    z-index: 1;
 }
 
 #zoomToAOI {
     display: block;
     position: relative;
     margin: 0px auto;
-    width: 130px;
-    height: 40px;
+    width: 110px;
+    height: 30px;
     padding: 10px;
-    border: none;
-    border-radius: 3px;
-    font-size: 12px;
-    text-align: center;
-    color: #fff;
-    background: #2e2e2e;
-    opacity: 0.9;
+}
+
+#zoomToAOI.hover {
+    background: #414141;
 }
 
 #coordinatesDisplay {
     display: block;
     position: relative;
-    margin: 0px auto;
+    margin: 10px auto;
     width: 250px;
     padding: 10px;
+}
+
+.menu {
+    background: #fff;
+    position: absolute;
+    bottom: 60px;
+    left: 12px;
+    width: 80px;
+    border: 1px solid rgba(0,0,0,0.4);
+}
+
+.menu a {
+    color: #404040;
+    display: block;
+    margin: 0;
+    padding: 0;
+    padding: 8px;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,0,0,0.25);
+}
+
+.menu a:last-child {
     border: none;
-    border-radius: 3px;
-    font-size: 12px;
-    text-align: center;
-    color: #fff;
-    background: #2e2e2e;
-    opacity: 0.9;
+}
+
+.menu a:hover {
+    background-color: #f8f8f8;
+    color: #404040;
+}
+
+.menu a.active {
+    background-color: #3887be;
+    color: #ffffff;
+}
+
+.menu a.active:hover {
+    background: #3074a4;
+}
+
+#styleSelector {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    width: 100px;
+    height: 20px;
 }
