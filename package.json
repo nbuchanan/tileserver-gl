@@ -17,10 +17,10 @@
     "node": ">=4.2.1 <5"
   },
   "scripts": {
-    "clean": "rimraf packages/** light/**",
-    "copy-pkg-deps": "copyfiles -f ./package-inputs/* packages && copyfiles -f ./node_modules/**/*.node packages/lib && copyfiles iSoDrive-config.json 'data/**' 'fonts/**' 'styles/**' packages/lib",
-    "package": "npm run copy-pkg-deps -s && pkg . --targets node4 --out-dir packages/lib",
-    "package-light": "npm run copy-pkg-deps -s && node build-light-pkg.js && cd light && npm install && pkg . --targets node4 --out-dir packages/lib",
+    "clean": "rimraf packaged/** light/**",
+    "copy-pkg-deps": "copyfiles -f ./package-inputs/* packaged && copyfiles -f ./node_modules/**/*.node packaged/lib && copyfiles iSoDrive-config.json 'data/**' 'fonts/**' 'styles/**' packaged/lib",
+    "package": "npm run copy-pkg-deps -s && pkg . --targets node4 --out-dir packaged/lib",
+    "package-light": "npm run copy-pkg-deps -s && node build-light-pkg.js && cd light && npm install && pkg . --targets node4 --out-dir packaged/lib && copyfiles data/** fonts/** styles/** packaged/lib",
     "test-iso": "mocha test/iso.js",
     "test": "mocha test/**.js"
   },
@@ -35,7 +35,7 @@
     "cors": "2.8.3",
     "express": "4.15.2",
     "filesize": "^3.5.10",
-    "gdal-mbt": "0.9.4",
+    "gdal-mbt": "0.9.5",
     "geojson": "^0.4.1",
     "glyph-pbf-composite": "0.0.2",
     "handlebars": "4.0.8",
