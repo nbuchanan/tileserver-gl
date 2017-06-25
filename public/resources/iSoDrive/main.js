@@ -12,6 +12,7 @@ var OPERATIONAL_DATA_LAYER_ID = 'Footprints';
 // TODO make these configurable
 var STYLE_JSON_URL = 'http://localhost:9001/styles/osm-bright.json';
 var BASE_DATA_JSON_URL = 'http://localhost:9001/base.json';
+var ISO_LAYER_TYPES_URL = 'http://localhost:9001/iso-types.json';
 var OPERATIONAL_DATA_JSON_URL = 'http://localhost:9001/iso.json';
 
 // Create map control
@@ -37,17 +38,31 @@ map.addControl(new mapboxgl.ScaleControl({maxWidth: 150, unit: 'metric'}));
 //     }
 // });
 // map.addControl(draw);
+//
+// var downloadButton = document.getElementById('download');
+// downloadButton.onclick = function() {
+//     var data = draw.getAll();
+//     if (data.features.length > 0) {
+//         var area = turf.area(data);
+//         // restrict to area to 2 decimal points
+//         var rounded_area = Math.round(area*100)/100;
+//         var answer = document.getElementById('downloadQ-area');
+//         answer.innerHTML = '<p><strong>' + rounded_area + '</strong></p><p>square meters</p>';
+//     } else {
+//         alert("Use the draw tools to draw a polygon!");
+//     }
+// };
 
 // Set AOI to move to based upon button
 var aoiFootprints = [];
 var currentAOIIndex = 0;
-document.getElementById('zoomToAOI').addEventListener('click', function() {
-    var bounds = aoiFootprints[currentAOIIndex];
-    map.fitBounds(bounds);
-    if (++currentAOIIndex === aoiFootprints.length) {
-        currentAOIIndex = 0;
-    }
-});
+// document.getElementById('zoomToAOI').addEventListener('click', function() {
+//     var bounds = aoiFootprints[currentAOIIndex];
+//     map.fitBounds(bounds);
+//     if (++currentAOIIndex === aoiFootprints.length) {
+//         currentAOIIndex = 0;
+//     }
+// });
 
 function addCustomSources() {
 
@@ -77,7 +92,7 @@ function createQueryResultBody(features) {
     var result = '';
     features.forEach(function (feature) {
         var props = feature.properties;
-        result += '<a href=\"javascript:void(0);\" onclick=\'window.open(\"file://' + props.filePath + '\"); return false;\' title=\"View file in folder\">' + props.fileName + '</a><br/>';
+        result += props.type + ' <a href=\"file://' + props.filePath + '\") title=\"View file in folder\">' + props.fileName + '</a> (' + props.sizeReadable + ')<br/>';
     });
     return result;
 }
@@ -100,12 +115,19 @@ $.get(BASE_DATA_JSON_URL, function(data) {
     });
 });
 
+// Load found data types
+var toggleableLayerIds = [ OPERATIONAL_DATA_LAYER_ID ];
+$.get(ISO_LAYER_TYPES_URL, function(data) {
+    console.log('Found types:');
+    data.forEach(function (foundType) {
+        console.log('\t' + foundType);
+    });
+});
+
 // Show cursor coordinates in WGS1984
 map.on('mousemove', function (e) {
     document.getElementById('coordinatesDisplay').innerHTML = sprintf('LAT/LNG : %.8g , %.8g', e.lngLat.lat, e.lngLat.lng);
 });
-
-var toggleableLayerIds = [ OPERATIONAL_DATA_LAYER_ID ];
 
 for (var i = 0; i < toggleableLayerIds.length; i++) {
     var id = toggleableLayerIds[i];

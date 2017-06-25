@@ -34,6 +34,7 @@
     "color": "1.0.3",
     "cors": "2.8.3",
     "express": "4.15.2",
+    "filesize": "^3.5.10",
     "gdal-mbt": "0.9.4",
     "geojson": "^0.4.1",
     "glyph-pbf-composite": "0.0.2",

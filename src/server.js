@@ -131,11 +131,17 @@ function start(opts) {
 
   var mbTileIndexer = { 'MBtiles': { 'gdalDrivers': ['MBtiles'], 'extensions': ['mbtiles'] } };
   var baseDataIndex = iso_utils.indexLayerMetadata(paths.mbtiles, mbTileIndexer);
-  var isoDataIndex = iso_utils.indexLayerMetadata(paths.baseline, isoConfig.indexers);
+  var existingIsoTypes = new Set();
+  var isoDataIndex = iso_utils.indexLayerMetadata(paths.baseline, isoConfig.indexers, existingIsoTypes);
 
   app.get('/base.json', function(req, res, next) {
-      res.setHeader('Content-Type', 'application/json');
-      res.send(baseDataIndex);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(baseDataIndex);
+  });
+
+  app.get('/iso-types.json', function(req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(Array.from(existingIsoTypes));
   });
 
   app.get('/iso.json', function(req, res, next) {
