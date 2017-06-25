@@ -39,13 +39,8 @@
     },
     "indexers": {
       "DTED" : {
-        "gdalDrivers": [
-          "DTED"
-        ],
-        "extensions" : [
-          "dt1",
-          "dt2"
-        ]
+        "gdalDrivers": [ "DTED" ],
+        "extensions" : [ "dt1",  "dt2" ]
       }
     }
   }
