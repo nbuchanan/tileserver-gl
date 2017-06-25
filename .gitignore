@@ -9,3 +9,4 @@ config*.json
 .idea
 packages
 !public/resources/**/plugins
+package-inputs/data/*

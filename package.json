@@ -17,10 +17,10 @@
     "node": ">=4.2.1 <5"
   },
   "scripts": {
-    "copy-pkg-data": "copyfiles -f data/* packages/data",
-    "copy-pkg-deps": "npm run copy-pkg-data -s && copyfiles -f ./package-inputs/* ./node_modules/**/*.node packages",
-    "package": "npm run copy-pkg-deps -s && pkg . --targets node4 --out-dir packages",
-    "package-light": "npm run copy-pkg-deps -s && node build-light-pkg.js && cd light && npm install && pkg . --targets node4 --out-dir packages && copyfiles 'fonts/**' 'styles/**' packages",
+    "clean": "rimraf packages/** light/**",
+    "copy-pkg-deps": "copyfiles -f ./package-inputs/* packages && copyfiles -f ./node_modules/**/*.node packages/lib && copyfiles iSoDrive-config.json 'data/**' 'fonts/**' 'styles/**' packages/lib",
+    "package": "npm run copy-pkg-deps -s && pkg . --targets node4 --out-dir packages/lib",
+    "package-light": "npm run copy-pkg-deps -s && node build-light-pkg.js && cd light && npm install && pkg . --targets node4 --out-dir packages/lib",
     "test-iso": "mocha test/iso.js",
     "test": "mocha test/**.js"
   },
@@ -45,6 +45,7 @@
     "morgan": "1.8.1",
     "node-pngquant-native": "1.0.4",
     "nomnom": "1.8.1",
+    "open": "0.0.5",
     "pbf": "3.0.5",
     "proj4": "2.4.3",
     "request": "2.81.0",
@@ -58,6 +59,7 @@
     "debug": "^2.6.8",
     "mocha": "^3.2.0",
     "pkg": "4.1.0",
+    "rimraf": "^2.6.1",
     "should": "^11.2.0",
     "supertest": "^3.0.0"
   },
