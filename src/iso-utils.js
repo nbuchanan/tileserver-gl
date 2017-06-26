@@ -14,7 +14,7 @@ var gdal = require('gdal-mbt'),
     turf = require('turf'),
     logger = require('loglevel').noConflict().getLogger('iSoDrive');
 
-var parseMetadataUsingGDAL = function (filePath, fileType, drivers) {
+var parseMetadataUsingGDAL = function(filePath, fileType, drivers, abbreviation, category) {
     // First attempt to open without specifying drivers
     var ds;
     try {
@@ -96,6 +96,8 @@ var parseMetadataUsingGDAL = function (filePath, fileType, drivers) {
         'fileName': path.basename(filePath),
         'size': fileStats.size,
         'sizeReadable': filesize(fileStats.size, {round: 0}),
+        'abbreviation': abbreviation,
+        'category': category,
         'footprint': bbox
     }, {
         'Polygon': 'footprint'
@@ -126,7 +128,9 @@ var getFiles = function(startPath, extRegex, extTypeLookup, results) {
                 results.push({
                     name: filename,
                     fileType: extTypeLookup[extFound].typeName,
-                    gdalDrivers: extTypeLookup[extFound].gdalDrivers
+                    gdalDrivers: extTypeLookup[extFound].gdalDrivers,
+                    abbreviation: extTypeLookup[extFound].abbreviation,
+                    category: extTypeLookup[extFound].category
                 });
             }
         }
@@ -150,7 +154,12 @@ module.exports.indexLayerMetadata = function (dataDirectory, fileTypes, isoTypes
             if (extensionTypeLookup.hasOwnProperty(extension)) {
                 logger.info('\t' + typeName + ': extension already registered as ' + extensionTypeLookup[extension].typeName + ' type.');
             } else {
-                extensionTypeLookup[extension] = {typeName: typeName, gdalDrivers: fileType.gdalDrivers};
+                extensionTypeLookup[extension] = {
+                    typeName: typeName,
+                    abbreviation: fileType.abbreviation,
+                    category: fileType.category,
+                    gdalDrivers: fileType.gdalDrivers
+                };
             }
         });
     });
@@ -166,16 +175,16 @@ module.exports.indexLayerMetadata = function (dataDirectory, fileTypes, isoTypes
 
     var relevantFiles = [];
     getFiles(dataDirectory, extensionsRegexObj, extensionTypeLookup, relevantFiles);
-    relevantFiles.forEach(function (relevantFile) {
-        logger.debug('\t\t' + relevantFile.name);
-        var result = parseMetadataUsingGDAL(relevantFile.name, relevantFile.fileType, relevantFile.gdalDrivers);
+    relevantFiles.forEach(function (rf) {
+        logger.debug('\t\t' + rf.name);
+        var result = parseMetadataUsingGDAL(rf.name, rf.fileType, rf.gdalDrivers, rf.abbreviation, rf.category);
         // Add found types to lookup
         if (isoTypes) {
-            if (!isoTypes.has(relevantFile.fileType)) {
-                isoTypes.add(relevantFile.fileType);
+            if (!isoTypes.hasOwnProperty(rf.fileType)) {
+                isoTypes[rf.fileType] = rf.abbreviation ? rf.abbreviation : '';
             }
-            geoJSON.features.push(result);
         }
+        geoJSON.features.push(result);
     });
 
     logger.debug();

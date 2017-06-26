@@ -129,9 +129,9 @@ function start(opts) {
     logger.debug(logStr);
   });
 
-  var mbTileIndexer = { 'Mapbox Tiles': { 'abbreviation': 'MBtiles', 'category': 'Terrain', 'gdalDrivers': ['MBtiles'], 'extensions': ['mbtiles'] } };
-  var baseDataIndex = iso_utils.indexLayerMetadata(paths.mbtiles, mbTileIndexer);
-  var existingIsoTypes = new Set();
+  var mbTileIndexer = { 'Mapbox Tiles': { 'abbreviation': 'MBtiles', 'category': 'Reference', 'gdalDrivers': ['MBtiles'], 'extensions': ['mbtiles'] } };
+  var baseDataIndex = iso_utils.indexLayerMetadata(paths.mbtiles, mbTileIndexer, null);
+  var existingIsoTypes = {};
   var isoDataIndex = iso_utils.indexLayerMetadata(paths.baseline, isoConfig.indexers, existingIsoTypes);
 
   app.get('/base.json', function(req, res, next) {
@@ -141,7 +141,7 @@ function start(opts) {
 
   app.get('/iso-types.json', function(req, res, next) {
     res.setHeader('Content-Type', 'application/json');
-    res.send(Array.from(existingIsoTypes));
+    res.send(existingIsoTypes);
   });
 
   app.get('/iso.json', function(req, res, next) {
