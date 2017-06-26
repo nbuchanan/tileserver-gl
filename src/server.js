@@ -129,7 +129,7 @@ function start(opts) {
     logger.debug(logStr);
   });
 
-  var mbTileIndexer = { 'MBtiles': { 'gdalDrivers': ['MBtiles'], 'extensions': ['mbtiles'] } };
+  var mbTileIndexer = { 'Mapbox Tiles': { 'abbreviation': 'MBtiles', 'category': 'Terrain', 'gdalDrivers': ['MBtiles'], 'extensions': ['mbtiles'] } };
   var baseDataIndex = iso_utils.indexLayerMetadata(paths.mbtiles, mbTileIndexer);
   var existingIsoTypes = new Set();
   var isoDataIndex = iso_utils.indexLayerMetadata(paths.baseline, isoConfig.indexers, existingIsoTypes);

@@ -7,6 +7,6 @@ plugins
 config*.json
 *.mbtiles
 .idea
-packages
+packaged
 !public/resources/**/plugins
 package-inputs/data/*

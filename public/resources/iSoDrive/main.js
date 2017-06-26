@@ -92,7 +92,8 @@ function createQueryResultBody(features) {
     var result = '';
     features.forEach(function (feature) {
         var props = feature.properties;
-        result += props.type + ' <a href=\"file://' + props.filePath + '\") title=\"View file in folder\">' + props.fileName + '</a> (' + props.sizeReadable + ')<br/>';
+        // var displayName =
+        result += props.type + ' <a href=\"file://' + props.filePath + '\") title=\"View file in folder\">' + props.fileName + '</a> (<i>' + props.sizeReadable + '</i>)<br/>';
     });
     return result;
 }

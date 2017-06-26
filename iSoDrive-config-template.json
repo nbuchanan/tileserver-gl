@@ -38,10 +38,7 @@
       "export": "data/export"
     },
     "indexers": {
-      "DTED" : {
-        "gdalDrivers": [ "DTED" ],
-        "extensions" : [ "dt1",  "dt2" ]
-      }
+      "Digital Terrain Elevation Data 0" : { "abbreviation": "DTED 0", "category": "Terrain", "gdalDrivers": ["DTED"], "extensions" : ["dt0"] }
     }
   }
 }
