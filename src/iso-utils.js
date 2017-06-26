@@ -156,24 +156,26 @@ module.exports.indexLayerMetadata = function (dataDirectory, fileTypes, isoTypes
     });
 
     // Create regular expression of all relevant extensions so there is only one traversal of the directory hierarchy
-    var extensionsRegex = '/..';
+    var extensionsRegex = '';
     Object.keys(extensionTypeLookup).forEach(function (extension) {
         extensionsRegex += '(' + extension + ')$|';
     });
-    extensionsRegex = extensionsRegex.slice(0, -1);
-    extensionsRegex += '/i'; // Set case insensitive flag
+    extensionsRegex = extensionsRegex.slice(0, -1); // Remove trailing pipe
     logger.debug('\tExtensions regex: ' + extensionsRegex);
+    var extensionsRegexObj = new RegExp(extensionsRegex, 'i'); // Set case insensitive flag
 
     var relevantFiles = [];
-    getFiles(dataDirectory, extensionsRegex, extensionTypeLookup, relevantFiles);
+    getFiles(dataDirectory, extensionsRegexObj, extensionTypeLookup, relevantFiles);
     relevantFiles.forEach(function (relevantFile) {
         logger.debug('\t\t' + relevantFile.name);
         var result = parseMetadataUsingGDAL(relevantFile.name, relevantFile.fileType, relevantFile.gdalDrivers);
         // Add found types to lookup
-        if (!isoTypes.has(relevantFile.fileType)) {
-            isoTypes.add(relevantFile.fileType);
+        if (isoTypes) {
+            if (!isoTypes.has(relevantFile.fileType)) {
+                isoTypes.add(relevantFile.fileType);
+            }
+            geoJSON.features.push(result);
         }
-        geoJSON.features.push(result);
     });
 
     logger.debug();
