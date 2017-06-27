@@ -25,6 +25,11 @@
       "style": "osm-bright-local.json",
       "serve_data": true,
       "serve_rendered": true
+    },
+    "positron": {
+      "style": "positron-local.json",
+      "serve_data": true,
+      "serve_rendered": true
     }
   },
   "data": {

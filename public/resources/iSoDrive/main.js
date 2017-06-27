@@ -13,24 +13,27 @@ var OPERATIONAL_DATA_EXTENT_OUTLINE = '#2e2e2e';
 
 // TODO make these configurable
 var PORT = 9001;
-var STYLE_JSON_URL = 'http://localhost:' + PORT + '/styles/osm-bright.json';
+var STYLE_NAME = 'osm-bright';
+var STYLE_JSON_URL = 'http://localhost:' + PORT + '/styles/' + STYLE_NAME + '.json';
 var BASE_DATA_JSON_URL = 'http://localhost:' + PORT + '/base.json';
 var ISO_LAYER_TYPES_URL = 'http://localhost:' + PORT + '/iso-types.json';
 var OPERATIONAL_DATA_JSON_URL = 'http://localhost:' + PORT + '/iso.json';
 
 // See http://colorbrewer2.org/?type=qualitative&scheme=Set3&n=8
 var currentColorIndex = -1;
-var colorCycle = ['#8dd3c7','#ffffb3','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5'];
+var colorCycle = ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5'];
 var getColorInCycle = function () {
     var color = colorCycle[++currentColorIndex];
-    if (currentColorIndex === colorCycle.length) { currentColorIndex = -1; }
+    if (currentColorIndex === colorCycle.length) {
+        currentColorIndex = -1;
+    }
     return color;
 };
 var ACTIVE_BUTTON_COLOR = '#3887be';
 
 var createSafeLayerId = function (inputValue) {
     // TODO Improve on this
-    return OPERATIONAL_LAYER_PREFIX + inputValue.replace(/\s+/g, '-').toLowerCase();
+    return OPERATIONAL_LAYER_PREFIX + inputValue.trim().replace(/\s+/g, '-').toLowerCase();
 };
 
 var getUniqueFeatures = function (array, comparatorProperty) {

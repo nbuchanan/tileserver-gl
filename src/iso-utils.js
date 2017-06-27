@@ -14,7 +14,44 @@ var gdal = require('gdal-mbt'),
     turf = require('turf'),
     logger = require('loglevel').noConflict().getLogger('iSoDrive');
 
+var hasGCSData = function(inputPath) {
+    var result = false;
+    if (fs.existsSync(inputPath)) {
+        var full = path.join(inputPath, 'gcs.csv');
+        if (fs.existsSync(full)) {
+            var gdalDataFileStats = fs.statSync(full);
+            // logger.debug('YEP : Size of gcs.csv: ' + filesize(gdalDataFileStats.size, {round: 0}));
+            result = true;
+        } else {
+            // logger.debug('\tNOPE : Given input path (' + inputPath + ') does not havs gcs.csv.');
+        }
+    } else {
+        // logger.debug('\tNOPE : Given input path (' + inputPath + ') does not exist.');
+    }
+    // logger.debug();
+    return result;
+};
+
 var parseMetadataUsingGDAL = function(filePath, fileType, drivers, abbreviation, category) {
+
+    // var pathInQuestion = gdal.config.get('GDAL_DATA');
+    // logger.debug('Current GDAL_DATA: ' + pathInQuestion);
+    // hasGCSData(pathInQuestion);
+
+    // var pathInQuestion = path.join(__dirname, 'deps/libgdal/gdal/data');
+    // logger.debug('__dirname: ' + pathInQuestion);
+    // hasGCSData(pathInQuestion);
+
+    // var pathInQuestion = path.join(process.cwd(), 'lib/gdal-data');
+    // // logger.debug('cwd: ' + pathInQuestion);
+    // if (!hasGCSData(pathInQuestion)) {
+    //     pathInQuestion = path.join(path.dirname(process.execPath), 'gdal-data');
+    //     // logger.debug('execPath dir: ' + pathInQuestion);
+    //     hasGCSData(pathInQuestion);
+    // }
+    // gdal.config.set('GDAL_DATA', pathInQuestion);
+    // // process.env['GDAL_DATA'] = gdalDataPath;
+
     // First attempt to open without specifying drivers
     var ds;
     try {
@@ -146,6 +183,16 @@ module.exports.indexLayerMetadata = function (dataDirectory, fileTypes, isoTypes
         'features': []
     };
 
+    // var pathInQuestion = path.join(process.cwd(), 'lib/gdal-data');
+    // // logger.debug('cwd: ' + pathInQuestion);
+    // if (!hasGCSData(pathInQuestion)) {
+    //     pathInQuestion = path.join(path.dirname(process.execPath), 'gdal-data');
+    //     // logger.debug('execPath dir: ' + pathInQuestion);
+    //     hasGCSData(pathInQuestion);
+    // }
+    // gdal.config.set('GDAL_DATA', pathInQuestion);
+    gdal.config.set('GDAL_DATA', path.join(process.cwd(), 'lib/gdal-data'));
+
     // Build look up for extension to assumed raster type. Note that precedence is assumed based on order of config file
     var extensionTypeLookup = {};
     Object.keys(fileTypes).forEach(function (typeName) {
@@ -177,14 +224,18 @@ module.exports.indexLayerMetadata = function (dataDirectory, fileTypes, isoTypes
     getFiles(dataDirectory, extensionsRegexObj, extensionTypeLookup, relevantFiles);
     relevantFiles.forEach(function (rf) {
         logger.trace('\t\t' + rf.name);
-        var result = parseMetadataUsingGDAL(rf.name, rf.fileType, rf.gdalDrivers, rf.abbreviation, rf.category);
-        // Add found types to lookup
-        if (isoTypes) {
-            if (!isoTypes.hasOwnProperty(rf.fileType)) {
-                isoTypes[rf.fileType] = rf.abbreviation ? rf.abbreviation : '';
+        try {
+            var result = parseMetadataUsingGDAL(rf.name, rf.fileType, rf.gdalDrivers, rf.abbreviation, rf.category);
+            // Add found types to lookup
+            if (isoTypes) {
+                if (!isoTypes.hasOwnProperty(rf.fileType)) {
+                    isoTypes[rf.fileType] = rf.abbreviation ? rf.abbreviation : '';
+                }
             }
+            geoJSON.features.push(result);
+        } catch (err) {
+            logger.info('Unable to read ' + rf.name + ' (' + rf.abbreviation + ') with GDAL: ' + err);
         }
-        geoJSON.features.push(result);
     });
 
     logger.trace();

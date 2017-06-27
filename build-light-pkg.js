@@ -15,7 +15,7 @@ require('child_process').execSync('rsync -av --exclude="light" --exclude=".git" 
 
 // Added assets as needed for pkg
 require('child_process').execSync('rsync -av --relative --delete ' +
-    './node_modules/mbtiles/lib/ ./node_modules/glyph-pbf-composite/proto/ ./node_modules/sharp/lib/ ' +
+    './node_modules/mbtiles/lib/ ./node_modules/glyph-pbf-composite/proto/ ./node_modules/sharp/lib/ ./src/ ' +
     'light', {
     stdio: 'inherit'
 });
