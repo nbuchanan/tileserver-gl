@@ -36,7 +36,7 @@ function start(opts) {
   console.log('Starting server');
 
   // TODO Make this configurable
-  logger.setLevel('TRACE');
+  logger.setLevel('DEBUG');
 
   var app = express().disable('x-powered-by'),
       serving = {

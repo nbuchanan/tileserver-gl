@@ -20,12 +20,12 @@ var parseMetadataUsingGDAL = function(filePath, fileType, drivers, abbreviation,
     try {
         ds = gdal.open(filePath);
     } catch (err) {
-        logger.debug('Unable to read ' + filePath + ' with default open');
+        logger.trace('Unable to read ' + filePath + ' with default open');
     }
 
     if (!ds) {
         drivers.foreach(function (driver) {
-            logger.debug('Attempting to parse ' + filePath + ' with ' + driver + ' driver');
+            logger.trace('Attempting to parse ' + filePath + ' with ' + driver + ' driver');
         });
     }
 
@@ -41,7 +41,7 @@ var parseMetadataUsingGDAL = function(filePath, fileType, drivers, abbreviation,
         return;
     }
 
-    logger.debug('\t\t\tUsed ' + driver.description + ' driver to open dataset');
+    logger.trace('\t\t\tUsed ' + driver.description + ' driver to open dataset');
 
     // raster dimensions
     var size = ds.rasterSize;
@@ -170,13 +170,13 @@ module.exports.indexLayerMetadata = function (dataDirectory, fileTypes, isoTypes
         extensionsRegex += '(' + extension + ')$|';
     });
     extensionsRegex = extensionsRegex.slice(0, -1); // Remove trailing pipe
-    logger.debug('\tExtensions regex: ' + extensionsRegex);
+    logger.trace('\tExtensions regex: ' + extensionsRegex);
     var extensionsRegexObj = new RegExp(extensionsRegex, 'i'); // Set case insensitive flag
 
     var relevantFiles = [];
     getFiles(dataDirectory, extensionsRegexObj, extensionTypeLookup, relevantFiles);
     relevantFiles.forEach(function (rf) {
-        logger.debug('\t\t' + rf.name);
+        logger.trace('\t\t' + rf.name);
         var result = parseMetadataUsingGDAL(rf.name, rf.fileType, rf.gdalDrivers, rf.abbreviation, rf.category);
         // Add found types to lookup
         if (isoTypes) {
@@ -187,9 +187,9 @@ module.exports.indexLayerMetadata = function (dataDirectory, fileTypes, isoTypes
         geoJSON.features.push(result);
     });
 
-    logger.debug();
+    logger.trace();
 
     var result = JSON.stringify(geoJSON);
-    logger.debug(result + '\r\n');
+    logger.trace(result + '\r\n');
     return result;
 };
