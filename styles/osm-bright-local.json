@@ -2863,9 +2863,7 @@
       ],
       "layout": {
         "text-font": [
-          "Open Sans Italic",
-          "Klokantech Noto Sans Italic",
-          "Klokantech Noto Sans CJK Regular"
+          "Open Sans Italic"
         ],
         "text-size": 14,
         "text-field": "{name}",
@@ -2893,9 +2891,7 @@
       ],
       "layout": {
         "text-font": [
-          "Open Sans Italic",
-          "Klokantech Noto Sans Italic",
-          "Klokantech Noto Sans CJK Regular"
+          "Open Sans Italic"
         ],
         "text-size": 14,
         "text-field": "{name}",
@@ -2923,9 +2919,7 @@
       ],
       "layout": {
         "text-font": [
-          "Open Sans Italic",
-          "Klokantech Noto Sans Italic",
-          "Klokantech Noto Sans CJK Regular"
+          "Open Sans Italic"
         ],
         "text-size": 14,
         "text-field": "{name}",
@@ -2963,9 +2957,7 @@
       "layout": {
         "text-padding": 2,
         "text-font": [
-          "Open Sans Semibold",
-          "Klokantech Noto Sans Regular",
-          "Klokantech Noto Sans CJK Regular"
+          "Open Sans Semibold"
         ],
         "text-anchor": "top",
         "icon-image": "{class}_11",
@@ -3014,9 +3006,7 @@
       "layout": {
         "text-padding": 2,
         "text-font": [
-          "Open Sans Semibold",
-          "Klokantech Noto Sans Regular",
-          "Klokantech Noto Sans CJK Regular"
+          "Open Sans Semibold"
         ],
         "text-anchor": "top",
         "icon-image": "{class}_11",
@@ -3064,9 +3054,7 @@
       "layout": {
         "text-padding": 2,
         "text-font": [
-          "Open Sans Semibold",
-          "Klokantech Noto Sans Regular",
-          "Klokantech Noto Sans CJK Regular"
+          "Open Sans Semibold"
         ],
         "text-anchor": "top",
         "icon-image": "{class}_11",
@@ -3111,9 +3099,7 @@
           ]
         },
         "text-font": [
-          "Open Sans Regular",
-          "Klokantech Noto Sans Regular",
-          "Klokantech Noto Sans CJK Regular"
+          "Open Sans Regular"
         ],
         "text-field": "{name}",
         "symbol-placement": "line",
@@ -3161,9 +3147,7 @@
           ]
         },
         "text-font": [
-          "Open Sans Regular",
-          "Klokantech Noto Sans Regular",
-          "Klokantech Noto Sans CJK Regular"
+          "Open Sans Regular"
         ],
         "text-field": "{name}",
         "symbol-placement": "line",
@@ -3204,9 +3188,7 @@
           ]
         },
         "text-font": [
-          "Open Sans Regular",
-          "Klokantech Noto Sans Regular",
-          "Klokantech Noto Sans CJK Regular"
+          "Open Sans Regular"
         ],
         "text-field": "{name}",
         "symbol-placement": "line",
@@ -3243,9 +3225,7 @@
         "icon-rotation-alignment": "viewport",
         "symbol-spacing": 500,
         "text-font": [
-          "Open Sans Semibold",
-          "Klokantech Noto Sans Regular",
-          "Klokantech Noto Sans CJK Regular"
+          "Open Sans Semibold"
         ],
         "symbol-placement": {
           "base": 1,
@@ -3296,9 +3276,7 @@
           ]
         },
         "text-font": [
-          "Open Sans Bold",
-          "Klokantech Noto Sans Bold",
-          "Klokantech Noto Sans CJK Bold"
+          "Open Sans Bold"
         ],
         "text-field": "{name_en}",
         "text-transform": "uppercase",
@@ -3324,9 +3302,7 @@
       ],
       "layout": {
         "text-font": [
-          "Open Sans Regular",
-          "Klokantech Noto Sans Regular",
-          "Klokantech Noto Sans CJK Regular"
+          "Open Sans Regular"
         ],
         "text-size": {
           "base": 1.2,
@@ -3364,9 +3340,7 @@
       ],
       "layout": {
         "text-font": [
-          "Open Sans Regular",
-          "Klokantech Noto Sans Regular",
-          "Klokantech Noto Sans CJK Regular"
+          "Open Sans Regular"
         ],
         "text-size": {
           "base": 1.2,
@@ -3412,9 +3386,7 @@
       ],
       "layout": {
         "text-font": [
-          "Open Sans Semibold",
-          "Klokantech Noto Sans Regular",
-          "Klokantech Noto Sans CJK Regular"
+          "Open Sans Semibold"
         ],
         "text-size": {
           "base": 1.2,
@@ -3460,9 +3432,7 @@
       ],
       "layout": {
         "text-font": [
-          "Open Sans Semibold",
-          "Klokantech Noto Sans Regular",
-          "Klokantech Noto Sans CJK Regular"
+          "Open Sans Semibold"
         ],
         "text-size": {
           "base": 1.2,
@@ -3515,9 +3485,7 @@
       ],
       "layout": {
         "text-font": [
-          "Open Sans Bold",
-          "Klokantech Noto Sans Bold",
-          "Klokantech Noto Sans CJK Bold"
+          "Open Sans Bold"
         ],
         "text-field": "{name_en}",
         "text-size": {
@@ -3564,9 +3532,7 @@
       ],
       "layout": {
         "text-font": [
-          "Open Sans Bold",
-          "Klokantech Noto Sans Bold",
-          "Klokantech Noto Sans CJK Bold"
+          "Open Sans Bold"
         ],
         "text-field": "{name_en}",
         "text-size": {
@@ -3613,9 +3579,7 @@
       ],
       "layout": {
         "text-font": [
-          "Open Sans Bold",
-          "Klokantech Noto Sans Bold",
-          "Klokantech Noto Sans CJK Bold"
+          "Open Sans Bold"
         ],
         "text-field": "{name_en}",
         "text-size": {
@@ -3655,9 +3619,7 @@
       ],
       "layout": {
         "text-font": [
-          "Open Sans Bold",
-          "Klokantech Noto Sans Bold",
-          "Klokantech Noto Sans CJK Bold"
+          "Open Sans Bold"
         ],
         "text-field": "{name_en}",
         "text-size": 14,
@@ -3669,30 +3631,6 @@
         "text-color": "#334",
         "text-halo-width": 2,
         "text-halo-color": "rgba(255,255,255,0.8)"
-      }
-    },
-    {
-      "id": "building3D",
-      "type": "fill-extrusion",
-      "source": "background-vector1",
-      "source-layer": "building",
-      "minzoom": 12,
-      "filter": [
-        ">",
-        "render_height",
-        0
-      ],
-      "paint": {
-        "fill-extrusion-opacity": 0.7,
-        "fill-extrusion-base": {
-          "type": "identity",
-          "property": "render_min_height"
-        },
-        "fill-extrusion-height": {
-          "type": "identity",
-          "property": "render_height"
-        },
-        "fill-extrusion-color": "rgba(170, 170, 170, 1)"
       }
     }
   ],
