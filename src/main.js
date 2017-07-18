@@ -54,7 +54,6 @@ var opts = require('nomnom')
 console.log('Starting ' + packageJson.name + ' v' + packageJson.version);
 
 var startServer = function(configPath, config) {
-
   return require('./server')({
     configPath: configPath,
     config: config,
