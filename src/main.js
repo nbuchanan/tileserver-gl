@@ -4,8 +4,7 @@
 
 var fs = require('fs'),
     path = require('path'),
-    request = require('request'),
-    open = require('open');
+    request = require('request');
 
 var mbtiles = require('mbtiles');
 
@@ -55,8 +54,6 @@ var opts = require('nomnom')
 console.log('Starting ' + packageJson.name + ' v' + packageJson.version);
 
 var startServer = function(configPath, config) {
-  // TODO Figure out how to delay opening URL until resources have loaded
-  open('http://localhost:' + opts.port + '/iSoDrive/index.html');
 
   return require('./server')({
     configPath: configPath,

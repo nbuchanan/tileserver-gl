@@ -39,11 +39,13 @@
   },
   "iso": {
     "data": {
-      "baseline": "data/operational",
-      "export": "data/export"
+      "operational": "data/operational"
     },
     "indexers": {
       "Digital Terrain Elevation Data 0" : { "abbreviation": "DTED 0", "category": "Terrain", "gdalDrivers": ["DTED"], "extensions" : ["dt0"] }
+    },
+    "logging": {
+      "level": "DEBUG"
     }
   }
 }

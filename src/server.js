@@ -29,14 +29,8 @@ if (!isLight) {
   serve_rendered = require('./serve_rendered');
 }
 
-var iso_utils = require('./iso-utils');
-var logger = require('loglevel').noConflict().getLogger('iSoDrive');
-
 function start(opts) {
   console.log('Starting server');
-
-  // TODO Make this configurable
-  logger.setLevel('DEBUG');
 
   var app = express().disable('x-powered-by'),
       serving = {
@@ -95,64 +89,20 @@ function start(opts) {
   checkPath('sprites');
   checkPath('mbtiles');
 
-  // Set up iso specific functionality
-  var isoConfig = config.iso || {};
-  var isoPaths = clone(isoConfig.data || {});
-  paths.baseline = path.resolve(paths.root, isoPaths.baseline || '');
-  paths.export = path.resolve(paths.root, isoPaths.export || '');
-  checkPath('baseline');
-  checkPath('export');
-
-  if (!isoConfig.indexers || isoConfig.indexers.length == 0) {
-    console.error('Must have at least one value for "indexers" property for iso config');
-    process.exit(1);
-  }
-
-  logger.debug('The following data indexers are configured');
-  Object.keys(isoConfig.indexers || {}).forEach(function(id) {
-    var indexer = isoConfig.indexers[id];
-    if (!indexer.extensions || indexer.extensions.length == 0) {
-      console.error('Must have at least one value for "extensions" property for ' + id + ' indexer');
-      process.exit(1);
-    }
-
-    if (!indexer.gdalDrivers || indexer.gdalDrivers.length == 0) {
-        console.error('Must have at least one value for "gdalDrivers" (e.g. GTiff) property for ' + id + ' indexer');
-        process.exit(1);
-    }
-
-    var logStr = '\t' + id + ' (';
-    Object.keys(indexer.extensions || {}).forEach(function(ext) {
-      logStr += indexer.extensions[ext] + ', ';
-    });
-    logStr = logStr.slice(0, -2) + ')';
-    logger.debug(logStr);
-  });
-
-  var mbTileIndexer = { 'Mapbox Tiles': { 'abbreviation': 'MBtiles', 'category': 'Reference', 'gdalDrivers': ['MBtiles'], 'extensions': ['mbtiles'] } };
-  var baseDataIndex = iso_utils.indexLayerMetadata(paths.mbtiles, mbTileIndexer, null);
-  var existingIsoTypes = {};
-  var isoDataIndex = iso_utils.indexLayerMetadata(paths.baseline, isoConfig.indexers, existingIsoTypes);
-
-  app.get('/base.json', function(req, res, next) {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(baseDataIndex);
-  });
-
-  app.get('/iso-types.json', function(req, res, next) {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(existingIsoTypes);
-  });
-
-  app.get('/iso.json', function(req, res, next) {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(isoDataIndex);
-  });
-
   var data = clone(config.data || {});
 
   if (opts.cors) {
     app.use(cors());
+  }
+
+  // Optionally include extensions
+  if (config.iso) {
+    var run_iso = require('./iso/server');
+    startupPromises.push(
+      run_iso(opts, config).then(function(sub) {
+        app.use('/', sub);
+      })
+    );
   }
 
   Object.keys(config.styles || {}).forEach(function(id) {
