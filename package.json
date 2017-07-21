@@ -22,7 +22,6 @@
     "copy-gdal-data": "copyfiles -f ./node_modules/gdal-mbt/deps/libgdal/gdal/data/* packaged/lib/gdal-data",
     "package": "npm run copy-pkg-deps -s && pkg . --targets node4 --out-dir packaged/lib",
     "package-light": "npm run copy-pkg-deps -s && node build-light-pkg.js && cd light && npm install && pkg . --targets node4 --out-path packaged/lib && copyfiles data/** fonts/** styles/** packaged/lib",
-    "test-iso": "mocha test/iso.js",
     "test": "mocha test/**.js"
   },
   "dependencies": {
