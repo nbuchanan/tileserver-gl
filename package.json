@@ -1,16 +1,15 @@
 {
-  "name": "tileserver-gl-pkg",
+  "name": "tileserver-gl",
   "version": "1.7.0",
-  "description": "Map tile server for JSON GL styles (bundled into executable using pkg) - vector and server side generated raster tiles",
+  "description": "Map tile server for JSON GL styles - vector and server side generated raster tiles",
   "main": "src/main.js",
   "bin": "src/main.js",
   "authors": [
-    "Petr Sloup <petr.sloup@klokantech.com>",
-    "Nick Buchanan <nbuchanan@gmail.com>"
+    "Petr Sloup <petr.sloup@klokantech.com>"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/nbuchanan/tileserver-gl.git"
+    "url": "https://github.com/klokantech/tileserver-gl.git"
   },
   "license": "BSD-2-Clause",
   "engines": {
