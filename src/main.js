@@ -48,8 +48,12 @@ var opts = require('nomnom')
     callback: function() {
       return packageJson.name + ' v' + packageJson.version;
     }
+  })
+  .option('pkgd', {
+    flag: true,
+    default: false,
+    help: 'Load dependencies if embedded in executable built using pkg'
   }).parse();
-
 
 // console.log('Starting ' + packageJson.name + ' v' + packageJson.version);
 
@@ -59,7 +63,8 @@ var startServer = function(configPath, config) {
     config: config,
     bind: opts.bind,
     port: opts.port,
-    cors: opts.cors
+    cors: opts.cors,
+    pkgd: opts.pkgd
   });
 };
 
