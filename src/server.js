@@ -99,7 +99,7 @@ function start(opts) {
   if (config.iso) {
     var run_iso = require('./iso/server');
     startupPromises.push(
-      run_iso(opts, config).then(function(sub) {
+      run_iso.init(opts, config).then(function(sub) {
         app.use('/', sub);
       })
     );
