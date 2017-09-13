@@ -32,6 +32,11 @@ var opts = require('nomnom')
     default: 8080,
     help: 'Port'
   })
+  .option('uiport', {
+    abbr: 'up',
+    default: 7777,
+    help: 'UI Port'
+  })
   .option('cors', {
     default: true,
     help: 'Enable Cross-origin resource sharing headers'
@@ -63,6 +68,7 @@ var startServer = function(configPath, config) {
     config: config,
     bind: opts.bind,
     port: opts.port,
+    uiport: opts.uiport,
     cors: opts.cors,
     pkgd: opts.pkgd
   });

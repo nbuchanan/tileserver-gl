@@ -97,11 +97,12 @@ function start(opts) {
 
   // Optionally include extensions
   if (config.iso) {
-    var run_iso = require('./iso/server');
+    var IsoServer = require('./iso/Server');
+    var iSoServer = new IsoServer();
     startupPromises.push(
-      run_iso.init(opts, config).then(function(sub) {
-        app.use('/', sub);
-      })
+        iSoServer.boot(opts, config).then(function(sub) {
+          app.use('/', sub);
+        })
     );
   }
 
