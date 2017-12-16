@@ -54,6 +54,10 @@ var opts = require('nomnom')
       return packageJson.name + ' v' + packageJson.version;
     }
   })
+  .option('index', {
+    abbr: 'i',
+    help: 'Index file'
+  })
   .option('pkgd', {
     flag: true,
     default: false,
@@ -70,6 +74,7 @@ var startServer = function(configPath, config) {
     port: opts.port,
     uiport: opts.uiport,
     cors: opts.cors,
+    index: opts.index,
     pkgd: opts.pkgd
   });
 };
